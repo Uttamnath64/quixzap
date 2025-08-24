@@ -1,6 +1,6 @@
 package responses
 
-import "github.com/Uttamnath64/arvo-fin/app/common"
+import "github.com/Uttamnath64/quick-connect/internal/common"
 
 type ServiceResponse struct {
 	StatusCode int
