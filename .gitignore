@@ -1,0 +1,4 @@
+app/config/env/.env 
+.vscode
+logs/
+mysql_data/
