@@ -23,30 +23,6 @@ func (r LoginRequest) IsValid() error {
 	return nil
 }
 
-// Register payload
-type RegisterRequest struct {
-	Name     string `json:"name" binding:"required"`
-	Email    string `json:"email" binding:"required"`
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
-
-func (r RegisterRequest) IsValid() error {
-	if err := Validate.IsValidName(r.Name); err != nil {
-		return err
-	}
-	if err := Validate.IsValidUsername(r.Username); err != nil {
-		return err
-	}
-	if err := Validate.IsValidEmail(r.Email); err != nil {
-		return err
-	}
-	if err := Validate.IsValidPassword(r.Password); err != nil {
-		return err
-	}
-	return nil
-}
-
 // Token payload
 type TokenRequest struct {
 	RefreshToken string `json:"refresh_token" binding:"required"`

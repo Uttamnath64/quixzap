@@ -9,19 +9,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Auth struct {
-	container   *storage.Container
-	authService *services.Auth
+type Admin struct {
+	container *storage.Container
+	service   *services.Admin
 }
 
-func NewAuth(container *storage.Container) *Auth {
-	return &Auth{
-		container:   container,
-		authService: services.NewAuth(container),
+func NewAdmin(container *storage.Container) *Admin {
+	return &Admin{
+		container: container,
+		service:   services.NewAdmin(container),
 	}
 }
 
-func (handler *Auth) Login(c *gin.Context) {
+func (handler *Admin) Get(c *gin.Context) {
 
 	rctx, ok := getRequestContext(c)
 	if !ok {
@@ -33,7 +33,7 @@ func (handler *Auth) Login(c *gin.Context) {
 		return
 	}
 
-	serviceResponse := handler.authService.Login(rctx, payload, c.Request.UserAgent(), c.ClientIP())
+	serviceResponse := handler.service.Login(rctx, payload, c.Request.UserAgent(), c.ClientIP())
 	if isErrorResponse(c, serviceResponse) {
 		return
 	}
@@ -45,19 +45,19 @@ func (handler *Auth) Login(c *gin.Context) {
 	})
 }
 
-func (handler *Auth) Register(c *gin.Context) {
+func (handler *Admin) GetAll(c *gin.Context) {
 
 	rctx, ok := getRequestContext(c)
 	if !ok {
 		return
 	}
 
-	var payload requests.RegisterRequest
+	var payload requests.LoginRequest
 	if !bindAndValidateJson(c, &payload) {
 		return
 	}
 
-	serviceResponse := handler.authService.Register(rctx, payload, c.Request.UserAgent(), c.ClientIP())
+	serviceResponse := handler.service.Login(rctx, payload, c.Request.UserAgent(), c.ClientIP())
 	if isErrorResponse(c, serviceResponse) {
 		return
 	}
@@ -69,20 +69,19 @@ func (handler *Auth) Register(c *gin.Context) {
 	})
 }
 
-func (handler *Auth) Token(c *gin.Context) {
+func (handler *Admin) Craete(c *gin.Context) {
 
 	rctx, ok := getRequestContext(c)
 	if !ok {
 		return
 	}
 
-	var payload requests.TokenRequest
+	var payload requests.LoginRequest
 	if !bindAndValidateJson(c, &payload) {
 		return
 	}
 
-	// Get token
-	serviceResponse := handler.authService.GetToken(rctx, payload, c.Request.UserAgent(), c.ClientIP())
+	serviceResponse := handler.service.Login(rctx, payload, c.Request.UserAgent(), c.ClientIP())
 	if isErrorResponse(c, serviceResponse) {
 		return
 	}
@@ -92,5 +91,52 @@ func (handler *Auth) Token(c *gin.Context) {
 		Message:  serviceResponse.Message,
 		Metadata: serviceResponse.Data,
 	})
+}
 
+func (handler *Admin) Update(c *gin.Context) {
+
+	rctx, ok := getRequestContext(c)
+	if !ok {
+		return
+	}
+
+	var payload requests.LoginRequest
+	if !bindAndValidateJson(c, &payload) {
+		return
+	}
+
+	serviceResponse := handler.service.Login(rctx, payload, c.Request.UserAgent(), c.ClientIP())
+	if isErrorResponse(c, serviceResponse) {
+		return
+	}
+
+	c.JSON(http.StatusOK, responses.ApiResponse{
+		Status:   true,
+		Message:  serviceResponse.Message,
+		Metadata: serviceResponse.Data,
+	})
+}
+
+func (handler *Admin) Block(c *gin.Context) {
+
+	rctx, ok := getRequestContext(c)
+	if !ok {
+		return
+	}
+
+	var payload requests.LoginRequest
+	if !bindAndValidateJson(c, &payload) {
+		return
+	}
+
+	serviceResponse := handler.service.Login(rctx, payload, c.Request.UserAgent(), c.ClientIP())
+	if isErrorResponse(c, serviceResponse) {
+		return
+	}
+
+	c.JSON(http.StatusOK, responses.ApiResponse{
+		Status:   true,
+		Message:  serviceResponse.Message,
+		Metadata: serviceResponse.Data,
+	})
 }
