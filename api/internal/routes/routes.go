@@ -18,5 +18,7 @@ func New(container *storage.Container, server *gin.Engine) *Routes {
 }
 
 func (routes *Routes) Handlers() {
-	// routes.AuthRoutes()
+	routes.AuthRoutes()
+	routes.AdminRoutes()
+	routes.ChatRoutes()
 }
