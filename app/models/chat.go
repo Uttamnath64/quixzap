@@ -7,12 +7,12 @@ import (
 )
 
 type Chat struct {
-	ID        uuid.UUID `json:"id" gorm:"type:char(36);primaryKey"`
-	SessionID uuid.UUID `json:"session_id" gorm:"type:char(36);index"`
-	Sender    string    `json:"sender" gorm:"type:enum('user','admin')"`
-	Content   string    `json:"content" gorm:"type:text"`
-	IsRead    bool      `json:"is_read" gorm:"default:false"`
-	CreatedAt time.Time `json:"created_at"`
+	BaseModel
+	UUID       uuid.UUID  `json:"uuid" gorm:"type:char(36);uniqueIndex"`
+	BlockedAt  *time.Time `json:"blocked_at"`
+	BlockedBy  *uint      `json:"blocked_by"`
+	DeviceInfo string     `json:"device_info" gorm:"type:TEXT"`
+	IpAddress  string     `json:"ip_address" gorm:"type:VARCHAR(45)"`
 }
 
 func (m *Chat) GetName() string {

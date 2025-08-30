@@ -4,6 +4,7 @@ import (
 	"github.com/Uttamnath64/quick-connect/app/common/types"
 	"github.com/Uttamnath64/quick-connect/app/models"
 	"github.com/Uttamnath64/quick-connect/app/utils/requests"
+	"github.com/google/uuid"
 )
 
 type AuthRepository interface {
@@ -22,13 +23,14 @@ type AdminRepository interface {
 }
 
 type UserRepository interface {
-	Create(rctx *requests.RequestContext, user *models.User) (uint, error)
+	// Create(rctx *requests.RequestContext, user *models.User) (uint, error)
 	UpdatePasswordByEmail(rctx *requests.RequestContext, email, newPassword string) error
-	Get(rctx *requests.RequestContext, userId uint) (*models.User, error)
+	// Get(rctx *requests.RequestContext, userId uint) (*models.User, error)
 	Block(rctx *requests.RequestContext, userId uint) error
 }
 
 type ChatRepository interface {
-	Sent(rctx *requests.RequestContext, user *models.User) (uint, error)
-	GetAll(rctx *requests.RequestContext, email, newPassword string) error
+	Create(rctx *requests.RequestContext, user *models.Chat) (uint, error)
+	UUIDExists(rctx *requests.RequestContext, uuid uuid.UUID) error
+	// GetAll(rctx *requests.RequestContext, email, newPassword string) error
 }

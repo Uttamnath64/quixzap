@@ -21,4 +21,5 @@ func (routes *Routes) Handlers() {
 	routes.AuthRoutes()
 	routes.AdminRoutes()
 	routes.ChatRoutes()
+	routes.MessageRoutes()
 }

@@ -49,7 +49,7 @@ func LoadEnv(fileName string) (env AppEnv, err error) {
 
 	viper.SetConfigName(fileName)
 	viper.SetConfigType("env")
-	viper.AddConfigPath("internal/config/env")
+	viper.AddConfigPath("app/config/env")
 	viper.AddConfigPath(".")
 
 	err = viper.ReadInConfig()

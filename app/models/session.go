@@ -3,7 +3,7 @@ package models
 import "github.com/google/uuid"
 
 type Session struct {
-	ID           uuid.UUID `json:"id" gorm:"type:char(36);primaryKey"`
+	BaseModel
 	AdminId      uuid.UUID `gorm:"not null"`
 	DeviceInfo   string    `gorm:"type:TEXT"`
 	IPAddress    string    `gorm:"type:VARCHAR(45)"`
