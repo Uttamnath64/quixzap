@@ -8,10 +8,8 @@ import (
 func (routes *Routes) ChatRoutes() {
 	handler := handlers.NewChat(routes.container)
 	middle := middleware.New(routes.container)
-	userGroup := routes.server.Group("user").Use(middle.AuthMiddleware())
+	group := routes.server.Group("chat").Use(middle.AuthMiddleware())
 	{
-		userGroup.GET("/start", handler.Start)
-		userGroup.GET("/:uuid", handler.GetAll)
-		userGroup.GET("/", handler.GetAll)
+		group.POST("/", handler.Create)
 	}
 }

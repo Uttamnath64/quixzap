@@ -1,12 +1,12 @@
-FROM golang:1.22.2
+FROM golang:1.23.5
 
 WORKDIR /app
 COPY . .
 
 RUN go mod download
 
-COPY script/start-api.sh script/.
+COPY scripts/start.sh scripts/.
 
-RUN chmod +x script/start-api.sh
+RUN chmod +x scripts/start.sh
 
-CMD ["./script/start.sh"]
+CMD ["./scripts/start.sh"]
