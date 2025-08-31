@@ -1,14 +1,14 @@
-package auth
+package services
 
 import (
 	"errors"
 	"fmt"
 	"time"
 
-	"github.com/Uttamnath64/quick-connect/app/models"
-	"github.com/Uttamnath64/quick-connect/app/repositories"
-	"github.com/Uttamnath64/quick-connect/app/storage"
-	"github.com/Uttamnath64/quick-connect/app/utils/requests"
+	"github.com/Uttamnath64/quick-connect/internal/app/models"
+	"github.com/Uttamnath64/quick-connect/internal/app/repositories"
+	"github.com/Uttamnath64/quick-connect/internal/app/storage"
+	"github.com/Uttamnath64/quick-connect/internal/app/utils/requests"
 	"github.com/golang-jwt/jwt"
 )
 
