@@ -1,4 +1,4 @@
-app/config/env/.env 
-.vscode
+.env
 logs/
 mysql_data/
+redis_data/

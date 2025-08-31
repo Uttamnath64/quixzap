@@ -2,18 +2,16 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"time"
 
 	"github.com/Uttamnath64/logger"
 	"github.com/Uttamnath64/quick-connect/internal/app/config"
 	"github.com/Uttamnath64/quick-connect/internal/app/storage"
 	"github.com/Uttamnath64/quick-connect/internal/app/utils/requests"
-	"github.com/Uttamnath64/quick-connect/internal/routes"
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
 )
 
 func main() {
+
 	// Initialize application
 	ctx := context.Background()
 	requests.NewResponse()
@@ -51,23 +49,13 @@ func main() {
 	}
 
 	// DI container
-	container := storage.NewContainer(&con, log, redis, &env)
+	storage.NewContainer(&con, log, redis, &env)
 
-	// Setup Gin server
-	server := gin.Default()
-	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowOrigins = []string{container.Env.Server.ClientOrigin}
-	corsConfig.AllowMethods = []string{"GET", "POST", "PUT"}
-	corsConfig.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
-	corsConfig.AllowCredentials = true
-	server.Use(cors.New(corsConfig))
-
-	// Setup routes
-	routes.New(container, server).Handlers()
-
-	// Run server
-	if err := server.Run(fmt.Sprintf(":%d", container.Env.Server.Port)); err != nil {
-		container.Logger.Error("api-application-server", err.Error())
-		return
+	// Add a long-running task to keep the container alive
+	log.Info("Consumer started, waiting for tasks...")
+	for {
+		// Example: Periodically log or process tasks
+		log.Info("Consumer is running...")
+		time.Sleep(10 * time.Second) // Adjust as needed
 	}
 }
