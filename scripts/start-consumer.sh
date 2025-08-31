@@ -5,5 +5,5 @@ if [ $? -ne 0 ]; then
     echo "Migration failed"
     exit 1
 fi
-# Start API
-/app/quick-connect-app
+# Start consumer
+/app/quick-connect-consumer
