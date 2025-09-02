@@ -4,9 +4,9 @@ import (
 	"os"
 
 	"github.com/Uttamnath64/logger"
-	"github.com/Uttamnath64/quick-connect/internal/app/config"
-	"github.com/Uttamnath64/quick-connect/internal/app/models"
-	"github.com/Uttamnath64/quick-connect/internal/app/storage"
+	"github.com/Uttamnath64/quixzap/internal/app/config"
+	"github.com/Uttamnath64/quixzap/internal/app/models"
+	"github.com/Uttamnath64/quixzap/internal/app/storage"
 )
 
 func getContainer() (*storage.Container, error) {

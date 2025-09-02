@@ -3,10 +3,10 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/Uttamnath64/quick-connect/internal/app/common/types"
-	"github.com/Uttamnath64/quick-connect/internal/app/services"
-	"github.com/Uttamnath64/quick-connect/internal/app/storage"
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/responses"
+	"github.com/Uttamnath64/quixzap/internal/app/common/types"
+	"github.com/Uttamnath64/quixzap/internal/app/services"
+	"github.com/Uttamnath64/quixzap/internal/app/storage"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/responses"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )

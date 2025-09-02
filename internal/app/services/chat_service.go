@@ -3,12 +3,12 @@ package services
 import (
 	"errors"
 
-	"github.com/Uttamnath64/quick-connect/internal/app/common"
-	"github.com/Uttamnath64/quick-connect/internal/app/models"
-	"github.com/Uttamnath64/quick-connect/internal/app/repositories"
-	"github.com/Uttamnath64/quick-connect/internal/app/storage"
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/requests"
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/responses"
+	"github.com/Uttamnath64/quixzap/internal/app/common"
+	"github.com/Uttamnath64/quixzap/internal/app/models"
+	"github.com/Uttamnath64/quixzap/internal/app/repositories"
+	"github.com/Uttamnath64/quixzap/internal/app/storage"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/responses"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )

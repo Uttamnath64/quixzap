@@ -1,4 +1,4 @@
-package middleware
+package middlewares
 
 import (
 	"context"
@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Uttamnath64/quick-connect/internal/app/common"
-	"github.com/Uttamnath64/quick-connect/internal/app/storage"
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/requests"
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/responses"
+	"github.com/Uttamnath64/quixzap/internal/app/common"
+	"github.com/Uttamnath64/quixzap/internal/app/storage"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/responses"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 )
