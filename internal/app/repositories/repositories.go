@@ -1,9 +1,9 @@
 package repositories
 
 import (
-	"github.com/Uttamnath64/quick-connect/internal/app/common/types"
-	"github.com/Uttamnath64/quick-connect/internal/app/models"
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/internal/app/common/types"
+	"github.com/Uttamnath64/quixzap/internal/app/models"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
 	"github.com/google/uuid"
 )
 

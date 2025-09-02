@@ -1,6 +1,6 @@
 package responses
 
-import "github.com/Uttamnath64/quick-connect/internal/app/common"
+import "github.com/Uttamnath64/quixzap/internal/app/common"
 
 type ServiceResponse struct {
 	StatusCode int

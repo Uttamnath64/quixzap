@@ -1,4 +1,4 @@
-module github.com/Uttamnath64/quick-connect
+module github.com/Uttamnath64/quixzap
 
 go 1.23.5
 

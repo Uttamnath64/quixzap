@@ -1,9 +1,9 @@
 package services
 
 import (
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/requests"
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/responses"
-	"github.com/Uttamnath64/quick-connect/pkg/validater"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/responses"
+	"github.com/Uttamnath64/quixzap/pkg/validater"
 	"github.com/google/uuid"
 )
 

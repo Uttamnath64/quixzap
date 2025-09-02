@@ -1,6 +1,6 @@
 package handlers
 
-import "github.com/Uttamnath64/quick-connect/internal/app/storage"
+import "github.com/Uttamnath64/quixzap/internal/app/storage"
 
 type Admin struct {
 	container *storage.Container

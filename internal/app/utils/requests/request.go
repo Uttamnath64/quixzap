@@ -1,6 +1,6 @@
 package requests
 
-import "github.com/Uttamnath64/quick-connect/pkg/validater"
+import "github.com/Uttamnath64/quixzap/pkg/validater"
 
 var (
 	Validate *validater.Validater

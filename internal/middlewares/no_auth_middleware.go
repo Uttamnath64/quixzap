@@ -1,14 +1,14 @@
-package middleware
+package middlewares
 
 import (
 	"context"
 	"time"
 
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
 	"github.com/gin-gonic/gin"
 )
 
-func (m *Middleware) AuthMiddleware() gin.HandlerFunc {
+func (m *Middleware) NoAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
 		// ⏳ Create a context with timeout (e.g., 5 seconds)

@@ -3,7 +3,7 @@ version: '3.9'
 services:
   mysql:
     image: mysql:8.0
-    container_name: quick-connect-mysql
+    container_name: quixzap-mysql
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
@@ -23,7 +23,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: quick-connect-redis
+    container_name: quixzap-redis
     restart: unless-stopped
     command: redis-server --requirepass ${REDIS_PASSWORD:-redispassword}
     ports:
@@ -39,8 +39,8 @@ services:
     networks:
       - app-network
 
-  quick-connect-app:
-    container_name: quick-connect-app
+  quixzap-app:
+    container_name: quixzap-app
     build:
       context: ..  # Project root
       dockerfile: docker/Dockerfile
@@ -49,9 +49,9 @@ services:
     env_file:
       - ../.env
     environment:
-      - MYSQL_HOST=${MYSQL_HOST:-quick-connect-mysql}
+      - MYSQL_HOST=${MYSQL_HOST:-quixzap-mysql}
       - MYSQL_PORT=${MYSQL_CONTAINER_PORT:-3306}
-      - REDIS_ADDR=${REDIS_HOST:-quick-connect-redis}:${REDIS_CONTAINER_PORT:-6379}
+      - REDIS_ADDR=${REDIS_HOST:-quixzap-redis}:${REDIS_CONTAINER_PORT:-6379}
       - APP_PORT=${APP_PORT:-8081}
       - CLIENT_ORIGIN=${CLIENT_ORIGIN:-http://localhost:3000}
       - ENVIRONMENT=${ENVIRONMENT:-DEVELOPMENT}
@@ -69,8 +69,8 @@ services:
     networks:
       - app-network
 
-  # quick-connect-consumer:
-  #   container_name: quick-connect-consumer
+  # quixzap-consumer:
+  #   container_name: quixzap-consumer
   #   build:
   #     context: ..
   #     dockerfile: docker/Dockerfile
@@ -79,9 +79,9 @@ services:
   #   env_file:
   #     - ../.env
   #   environment:
-  #     - MYSQL_HOST=${MYSQL_HOST:-quick-connect-mysql}
+  #     - MYSQL_HOST=${MYSQL_HOST:-quixzap-mysql}
   #     - MYSQL_PORT=${MYSQL_CONTAINER_PORT:-3306}
-  #     - REDIS_ADDR=${REDIS_HOST:-quick-connect-redis}:${REDIS_CONTAINER_PORT:-6379}
+  #     - REDIS_ADDR=${REDIS_HOST:-quixzap-redis}:${REDIS_CONTAINER_PORT:-6379}
   #   depends_on:
   #     mysql:
   #       condition: service_healthy

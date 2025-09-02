@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/Uttamnath64/logger"
-	"github.com/Uttamnath64/quick-connect/internal/app/config"
-	"github.com/Uttamnath64/quick-connect/internal/app/storage"
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/internal/app/config"
+	"github.com/Uttamnath64/quixzap/internal/app/storage"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
 )
 
 func main() {

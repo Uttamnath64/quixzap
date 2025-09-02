@@ -5,11 +5,13 @@ type UserType int8
 
 const (
 	UserTypeUser UserType = iota + 1
+	UserTypeCustomer
+	UserTypeCustomerSupportPanel
 	UserTypeAdmin
 )
 
 func (t UserType) String() string {
-	names := [...]string{"", "User", "Admin"}
+	names := [...]string{"", "User", "Customer", "Customer Support Panel", "Admin"}
 	if !t.IsValid() {
 		return "Unknown"
 	}

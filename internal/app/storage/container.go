@@ -2,7 +2,7 @@ package storage
 
 import (
 	"github.com/Uttamnath64/logger"
-	"github.com/Uttamnath64/quick-connect/internal/app/config"
+	"github.com/Uttamnath64/quixzap/internal/app/config"
 )
 
 type Container struct {

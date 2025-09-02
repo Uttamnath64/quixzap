@@ -5,10 +5,10 @@ import (
 	"fmt"
 
 	"github.com/Uttamnath64/logger"
-	"github.com/Uttamnath64/quick-connect/internal/app/config"
-	"github.com/Uttamnath64/quick-connect/internal/app/storage"
-	"github.com/Uttamnath64/quick-connect/internal/app/utils/requests"
-	"github.com/Uttamnath64/quick-connect/internal/routes"
+	"github.com/Uttamnath64/quixzap/internal/app/config"
+	"github.com/Uttamnath64/quixzap/internal/app/storage"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/internal/routes"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
