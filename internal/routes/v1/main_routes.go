@@ -6,7 +6,7 @@ import (
 )
 
 func (routes *RoutesV1) MainRoutes() {
-	handler := handlers.NewAuth(routes.container)
+	handler := handlers.NewMain(routes.container)
 	middle := middlewares.New(routes.container)
 
 	// No-auth routes for onboarding
@@ -14,6 +14,6 @@ func (routes *RoutesV1) MainRoutes() {
 	{
 		routes.rGroup.POST("/auth/register", handler.Register)
 		routes.rGroup.POST("/auth/login", handler.Login)
-		routes.rGroup.GET("/customer/subscription/plans", handler.ListPlans)
+		// routes.rGroup.GET("/customer/subscription/plans", handler.ListPlans)
 	}
 }

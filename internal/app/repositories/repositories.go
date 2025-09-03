@@ -8,7 +8,8 @@ import (
 )
 
 type AuthRepository interface {
-	GetSessionByRefreshToken(rctx *requests.RequestContext, refreshToken string) (*models.Session, error)
+	GetSessionByUser(rctx *requests.RequestContext, userId uint, userType types.UserType, signedToken string) (*models.Session, error)
+	GetSessionByRefreshToken(rctx *requests.RequestContext, refreshToken string, userType types.UserType) (*models.Session, error)
 	CreateSession(rctx *requests.RequestContext, session *models.Session) (uint, error)
 	UpdateSession(rctx *requests.RequestContext, id uint, refreshToken string, expiresAt int64) error
 	DeleteSession(rctx *requests.RequestContext, sessionID uint) error

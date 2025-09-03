@@ -1,48 +1,41 @@
 package ws
 
-import (
-	"net/http"
+// var upgrader = websocket.Upgrader{
+// 	CheckOrigin: func(r *http.Request) bool {
+// 		return true // Adjust for production
+// 	},
+// }
 
-	"github.com/Uttamnath64/quixzap/internal/app/storage"
-	"github.com/gin-gonic/gin"
-)
+// type Hub struct {
+// 	container *storage.Container
+// }
 
-var upgrader = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool {
-		return true // Adjust for production
-	},
-}
+// func NewHub(container *storage.Container) *Hub {
+// 	return &Hub{container: container}
+// }
 
-type Hub struct {
-	container *storage.Container
-}
+// func (h *Hub) UserWebSocket(c *gin.Context) {
+// 	// Upgrade to WebSocket
+// 	conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to upgrade to WebSocket"})
+// 		return
+// 	}
+// 	defer conn.Close()
 
-func NewHub(container *storage.Container) *Hub {
-	return &Hub{container: container}
-}
+// 	// Handle user WebSocket connection (e.g., session_id validation, message routing)
+// 	// Placeholder: Add logic to validate session_id, load chat history, and route messages
+// }
 
-func (h *Hub) UserWebSocket(c *gin.Context) {
-	// Upgrade to WebSocket
-	conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to upgrade to WebSocket"})
-		return
-	}
-	defer conn.Close()
+// func (h *Hub) AdminWebSocket(c *gin.Context) {
+// 	// Upgrade to WebSocket
+// 	conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to upgrade to WebSocket"})
+// 		return
+// 	}
+// 	defer conn.Close()
 
-	// Handle user WebSocket connection (e.g., session_id validation, message routing)
-	// Placeholder: Add logic to validate session_id, load chat history, and route messages
-}
-
-func (h *Hub) AdminWebSocket(c *gin.Context) {
-	// Upgrade to WebSocket
-	conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to upgrade to WebSocket"})
-		return
-	}
-	defer conn.Close()
-
-	// Handle admin WebSocket connection (e.g., assign chats, route messages)
-	// Placeholder: Add logic to manage multiple chats, load history, and route messages
-}
+// 	// Handle admin WebSocket connection (e.g., assign chats, route messages)
+// 	// Placeholder: Add logic to manage multiple chats, load history, and route messages
+// }
