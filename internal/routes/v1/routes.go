@@ -20,8 +20,8 @@ func New(container *storage.Container, server *gin.Engine) *RoutesV1 {
 func (routes *RoutesV1) Handlers() {
 	// Register all v1 route groups
 	routes.MainRoutes()
-	routes.CustomerRoutes()
-	routes.AdminRoutes()
-	routes.WidgetRoutes()
-	routes.SuperAdminRoutes()
+	// routes.CustomerRoutes()
+	// routes.AdminRoutes()
+	// routes.WidgetRoutes()
+	// routes.SuperAdminRoutes()
 }

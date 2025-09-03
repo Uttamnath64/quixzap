@@ -10,7 +10,7 @@ type Routes struct {
 	container *storage.Container
 	server    *gin.Engine
 	v1        *v1.RoutesV1
-	ws        *ws.WSRoutes
+	// ws        *ws.WSRoutes
 }
 
 func New(container *storage.Container, server *gin.Engine) *Routes {
@@ -18,17 +18,17 @@ func New(container *storage.Container, server *gin.Engine) *Routes {
 		container: container,
 		server:    server,
 		v1:        v1.New(container, server),
-		ws:        ws.New(container, server),
+		// ws:        ws.New(container, server),
 	}
 }
 
 func (routes *Routes) Handlers() {
 	// Serve static files for the main site
-	routes.server.Static("/public/main", "./internal/public/main")
+	routes.server.Static("/public/main", "./public/main")
 
 	// Set up API routes under /api/v1
 	routes.v1.Handlers()
 
 	// Set up WebSocket routes under /ws
-	routes.ws.Handlers()
+	// routes.ws.Handlers()
 }
