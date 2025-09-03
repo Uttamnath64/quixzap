@@ -8,10 +8,8 @@ import (
 func (routes *RoutesV1) SuperAdminRoutes() {
 	handler := handlers.NewSuperAdmin(routes.container)
 	middle := middlewares.New(routes.container)
-
-	// Super admin routes
 	routes.rGroup.POST("/superadmin/login", middle.NoAuthMiddleware(), handler.SuperAdminLogin)
-	superAdminGroup := routes.rGroup.Group("/superadmin").Use(middle.SuperAdminAuthMiddleware())
+	superAdminGroup := routes.rGroup.Group("/superadmin").Use(middle.Middleware())
 	{
 		superAdminGroup.GET("/customers", handler.ListCustomers)
 		superAdminGroup.GET("/customers/:customer_id", handler.GetCustomerDetails)

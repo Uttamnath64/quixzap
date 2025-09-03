@@ -5,7 +5,6 @@ import (
 
 	"github.com/Uttamnath64/quixzap/internal/app/storage"
 	"github.com/gin-gonic/gin"
-	"github.com/gorilla/websocket"
 )
 
 var upgrader = websocket.Upgrader{

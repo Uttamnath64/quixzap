@@ -3,7 +3,6 @@ package ws
 import (
 	"github.com/Uttamnath64/quixzap/internal/app/storage"
 	"github.com/Uttamnath64/quixzap/internal/middlewares"
-	"github.com/Uttamnath64/quixzap/internal/ws"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,10 +19,8 @@ func New(container *storage.Container, server *gin.Engine) *WSRoutes {
 }
 
 func (routes *WSRoutes) Handlers() {
-	hub := ws.NewHub(routes.container)
+	hub := NewHub(routes.container)
 	middle := middlewares.New(routes.container)
-
-	// WebSocket endpoints
-	routes.rGroup.GET("/user/:customer_id/:session_id", middle.SessionAuthMiddleware(), hub.UserWebSocket)
-	routes.rGroup.GET("/admin/:admin_id", middle.AdminAuthMiddleware(), hub.AdminWebSocket)
+	routes.rGroup.GET("/user/:customer_id/:session_id", middle.Middleware(), hub.UserWebSocket)
+	routes.rGroup.GET("/admin/:admin_id", middle.Middleware(), hub.AdminWebSocket)
 }

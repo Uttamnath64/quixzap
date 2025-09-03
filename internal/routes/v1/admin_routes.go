@@ -8,10 +8,8 @@ import (
 func (routes *RoutesV1) AdminRoutes() {
 	handler := handlers.NewAdmin(routes.container)
 	middle := middlewares.New(routes.container)
-
-	// Admin routes
 	routes.rGroup.POST("/admin/login", middle.NoAuthMiddleware(), handler.AdminLogin)
-	adminGroup := routes.rGroup.Group("/admin").Use(middle.AdminAuthMiddleware())
+	adminGroup := routes.rGroup.Group("/admin").Use(middle.Middleware())
 	{
 		adminGroup.GET("/profile", handler.GetAdminProfile)
 		adminGroup.PUT("/profile", handler.UpdateAdminProfile)

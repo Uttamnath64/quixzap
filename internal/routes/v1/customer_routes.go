@@ -8,9 +8,7 @@ import (
 func (routes *RoutesV1) CustomerRoutes() {
 	handler := handlers.NewCustomer(routes.container)
 	middle := middlewares.New(routes.container)
-
-	// Customer routes requiring JWT authentication
-	customerGroup := routes.rGroup.Group("/customer").Use(middle.CustomerAuthMiddleware())
+	customerGroup := routes.rGroup.Group("/customer").Use(middle.Middleware())
 	{
 		customerGroup.GET("/profile", handler.GetCustomerProfile)
 		customerGroup.PUT("/profile", handler.UpdateCustomerProfile)
