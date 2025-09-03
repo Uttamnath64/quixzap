@@ -12,7 +12,7 @@ func (routes *RoutesV1) MainRoutes() {
 	// No-auth routes for onboarding
 	routes.rGroup.Use(middle.NoAuthMiddleware())
 	{
-		routes.rGroup.POST("/p/register", handler.Register)
+		routes.rGroup.POST("/auth/register", handler.Register)
 		routes.rGroup.POST("/auth/login", handler.Login)
 		routes.rGroup.GET("/customer/subscription/plans", handler.ListPlans)
 	}
