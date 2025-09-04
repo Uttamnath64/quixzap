@@ -1,6 +1,6 @@
 package models
 
-type WidgetConfig struct {
+type Widget struct {
 	BaseModel
 	MemberID       uint   `json:"member_id" gorm:"not null"`
 	BusinessID     uint   `json:"business_id" gorm:"not null"`
@@ -14,6 +14,6 @@ type WidgetConfig struct {
 	IsActive       bool   `json:"is_active" gorm:"default:true"`
 }
 
-func (m *WidgetConfig) GetName() string {
-	return "widget_configs"
+func (m *Widget) GetName() string {
+	return "widgets"
 }

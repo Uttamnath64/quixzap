@@ -5,6 +5,7 @@ import (
 
 	"github.com/Uttamnath64/logger"
 	"github.com/Uttamnath64/quixzap/internal/app/config"
+	"github.com/Uttamnath64/quixzap/internal/app/migrations/scripts"
 	"github.com/Uttamnath64/quixzap/internal/app/models"
 	"github.com/Uttamnath64/quixzap/internal/app/storage"
 )
@@ -44,14 +45,27 @@ func main() {
 
 	// migration database
 	err = container.Config.DB.AutoMigrate(
-		&models.Chat{},
-		&models.Session{},
 		&models.Admin{},
-		&models.Message{},
+		&models.Avatar{},
+		&models.BlockedIP{},
+		&models.Business{},
+		&models.ChatMessage{},
+		&models.ChatSession{},
+		&models.Currency{},
+		&models.Member{},
+		&models.MigrationVersion{},
+		&models.Plan{},
+		&models.Session{},
+		&models.Subscription{},
+		&models.Widget{},
 	)
 	if err != nil {
 		container.Logger.Error("app-migrate-config-error", "Failed to migrate the database", err)
 		return
+	}
+
+	if err := scripts.RunMigrations(container); err != nil {
+		os.Exit(1)
 	}
 
 	container.Logger.Info("app-migrate-done", "message", "👍 Migration completed!")
