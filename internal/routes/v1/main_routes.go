@@ -14,6 +14,9 @@ func (routes *RoutesV1) MainRoutes() {
 	{
 		routes.rGroup.POST("/auth/register", handler.Register)
 		routes.rGroup.POST("/auth/login", handler.Login)
+		routes.rGroup.POST("/auth/send-otp", handler.SendOTP)
+		routes.rGroup.POST("/auth/reset-password", handler.ResetPassword)
+		routes.rGroup.POST("/auth/token", handler.Token)
 		// routes.rGroup.GET("/customer/subscription/plans", handler.ListPlans)
 	}
 }

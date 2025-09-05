@@ -25,7 +25,7 @@ type JWTClaim struct {
 	jwt.StandardClaims
 }
 
-func New(container *storage.Container, authRepo repositories.AuthRepository) *JWT {
+func NewJWT(container *storage.Container, authRepo repositories.AuthRepository) *JWT {
 	return &JWT{
 		container: container,
 		authRepo:  authRepo,

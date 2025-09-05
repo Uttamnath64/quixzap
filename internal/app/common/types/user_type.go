@@ -1,17 +1,16 @@
 package types
 
-// User, Admin
+// "Member", "Support Member", "Admin"
 type UserType int8
 
 const (
-	UserTypeUser UserType = iota + 1
-	UserTypeCustomer
-	UserTypeCustomerSupportPanel
+	UserTypeMember UserType = iota + 1
+	UserTypeSupportMember
 	UserTypeAdmin
 )
 
 func (t UserType) String() string {
-	names := [...]string{"", "User", "Customer", "Customer Support Panel", "Admin"}
+	names := [...]string{"", "Member", "Support Member", "Admin"}
 	if !t.IsValid() {
 		return "Unknown"
 	}
@@ -19,5 +18,5 @@ func (t UserType) String() string {
 }
 
 func (t UserType) IsValid() bool {
-	return t >= UserTypeUser && t <= UserTypeAdmin
+	return t >= UserTypeMember && t <= UserTypeAdmin
 }
