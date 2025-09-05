@@ -4,7 +4,7 @@ import (
 	"github.com/Uttamnath64/quixzap/internal/app/common/types"
 	"github.com/Uttamnath64/quixzap/internal/app/models"
 	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
-	"github.com/google/uuid"
+	"github.com/Uttamnath64/quixzap/internal/app/utils/responses"
 )
 
 type AuthRepository interface {
@@ -15,23 +15,22 @@ type AuthRepository interface {
 	DeleteSession(rctx *requests.RequestContext, sessionID uint) error
 }
 
-type AdminRepository interface {
-	GetList(rctx *requests.RequestContext, userId uint) (*[]models.Admin, error)
-	Get(rctx *requests.RequestContext, id, userId uint, userType types.UserType) (*models.Admin, error)
-	Create(rctx *requests.RequestContext, portfolio models.Admin) error
-	Update(rctx *requests.RequestContext, id, userId uint, payload requests.AdminRequest) error
-	Delete(rctx *requests.RequestContext, id, userId uint) error
+type AvatarRepository interface {
+	Get(rctx *requests.RequestContext, id uint) (*models.Avatar, error)
+	GetByNameAndType(rctx *requests.RequestContext, name string, avatarType types.AvatarType) *models.Avatar
+	AvatarByTypeExists(rctx *requests.RequestContext, id uint, avatarType types.AvatarType) error
+	GetAvatarsByType(rctx *requests.RequestContext, avatarType types.AvatarType) (*[]models.Avatar, error)
+	Create(rctx *requests.RequestContext, payload models.Avatar) (uint, error)
+	Update(rctx *requests.RequestContext, id uint, payload requests.AvatarRequest) error
 }
 
-type UserRepository interface {
-	// Create(rctx *requests.RequestContext, user *models.User) (uint, error)
+type MemberRepository interface {
+	GetMemberByUsernameOrEmail(rctx *requests.RequestContext, username string, email string, member *models.Member) error
+	UsernameExists(rctx *requests.RequestContext, username string) error
+	EmailExists(rctx *requests.RequestContext, email string) error
+	Create(rctx *requests.RequestContext, member *models.Member) (uint, error)
 	UpdatePasswordByEmail(rctx *requests.RequestContext, email, newPassword string) error
-	// Get(rctx *requests.RequestContext, userId uint) (*models.User, error)
-	Block(rctx *requests.RequestContext, userId uint) error
-}
-
-type ChatRepository interface {
-	Create(rctx *requests.RequestContext, user *models.Chat) (uint, error)
-	UUIDExists(rctx *requests.RequestContext, uuid uuid.UUID) error
-	// GetAll(rctx *requests.RequestContext, email, newPassword string) error
+	GetMember(rctx *requests.RequestContext, memberId uint, member *models.Member) error
+	Get(rctx *requests.RequestContext, memberId uint) (*responses.MemberResponse, error)
+	Update(rctx *requests.RequestContext, memberId uint, payload requests.UpdateMember) error
 }

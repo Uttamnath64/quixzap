@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuixZap - OTP Verification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            border: 1px solid #e8e8e8;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #4a90e2;
+        }
+
+        .title {
+            font-size: 22px;
+            color: #222;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .message {
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .otp-box {
+            background: #f1f6ff;
+            padding: 15px 20px;
+            margin: 15px auto;
+            font-size: 28px;
+            font-weight: bold;
+            color: #4a90e2;
+            letter-spacing: 6px;
+            text-align: center;
+            border: 2px dashed #4a90e2;
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .info {
+            font-size: 15px;
+            color: #666;
+            text-align: center;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            line-height: 1.5;
+            border-top: 1px solid #f1f1f1;
+            padding-top: 15px;
+        }
+
+        .footer strong {
+            color: #4a90e2;
+        }
+
+        .support-link {
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">QuixZap</div>
+            <div class="title">OTP Verification</div>
+        </div>
+
+        <!-- Message -->
+        <p class="message">
+            Hi {{ .UserName }},<br><br>
+            {{ if eq .Type "register" }}
+            Welcome to <strong>QuixZap</strong>!
+            Use the One-Time Password (OTP) below to complete your <strong>registration</strong>.
+            {{ else if eq .Type "forgot" }}
+            We received a request to reset your password on <strong>QuixZap</strong>.
+            Use the OTP below to proceed with your <strong>password reset</strong>.
+            {{ else }}
+            Use the following OTP to complete your verification process on <strong>QuixZap</strong>.
+            {{ end }}
+        </p>
+
+        <!-- OTP Box -->
+        <div class="otp-box">{{ .OTP }}</div>
+
+        <!-- Info -->
+        <p class="info">
+            This OTP is valid for <strong>5 minutes</strong>.
+            If you didn’t request this, please ignore this email.
+        </p>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Thank you,<br>
+                <strong>Arvo - QuixZap Team</strong>
+            </p>
+            <p>
+                Need help? Contact us at
+                <a class="support-link" href="mailto:support@quixzap.com">support@quixzap.com</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
