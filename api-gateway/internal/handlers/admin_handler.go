@@ -1,15 +1,15 @@
 package handlers
 
-import "github.com/Uttamnath64/quixzap/internal/app/storage"
+import "github.com/Uttamnath64/quixzap/app/appcontext"
 
 type Admin struct {
-	container *storage.Container
+	appCtx *appcontext.AppContext
 	// service   *services.Admin
 }
 
-func NewAdmin(container *storage.Container) *Admin {
+func NewAdmin(appCtx *appcontext.AppContext) *Admin {
 	return &Admin{
-		container: container,
+		appCtx: appCtx,
 		// service:   services.NewAdmin(container),
 	}
 }

@@ -1,15 +1,15 @@
 package handlers
 
-import "github.com/Uttamnath64/quixzap/internal/app/storage"
+import "github.com/Uttamnath64/quixzap/app/appcontext"
 
 type Auth struct {
-	container *storage.Container
+	appCtx *appcontext.AppContext
 	// authService *services.Auth
 }
 
-func NewAuth(container *storage.Container) *Auth {
+func NewAuth(appCtx *appcontext.AppContext) *Auth {
 	return &Auth{
-		container: container,
+		appCtx: appCtx,
 		// authService: services.NewAuth(container),
 	}
 }

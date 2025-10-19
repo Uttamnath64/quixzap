@@ -1,23 +1,23 @@
 package routes
 
 import (
-	"github.com/Uttamnath64/quixzap/internal/app/storage"
-	v1 "github.com/Uttamnath64/quixzap/internal/routes/v1"
+	v1 "github.com/Uttamnath64/quixzap/api-gateway/internal/routes/v1"
+	"github.com/Uttamnath64/quixzap/app/appcontext"
 	"github.com/gin-gonic/gin"
 )
 
 type Routes struct {
-	container *storage.Container
-	server    *gin.Engine
-	v1        *v1.RoutesV1
+	appCtx *appcontext.AppContext
+	server *gin.Engine
+	v1     *v1.RoutesV1
 	// ws        *ws.WSRoutes
 }
 
-func New(container *storage.Container, server *gin.Engine) *Routes {
+func New(appCtx *appcontext.AppContext, server *gin.Engine) *Routes {
 	return &Routes{
-		container: container,
-		server:    server,
-		v1:        v1.New(container, server),
+		appCtx: appCtx,
+		server: server,
+		v1:     v1.New(appCtx, server),
 		// ws:        ws.New(container, server),
 	}
 }

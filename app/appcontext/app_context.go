@@ -10,7 +10,7 @@ import (
 
 type AppContext struct {
 	Logger *logger.Logger
-	MySQL  *config.Mysql
+	MySQL  *config.MySQL
 	Env    *config.AppEnv
 	Mongo  *mongo.Database
 	Redis  *storage.RedisClient

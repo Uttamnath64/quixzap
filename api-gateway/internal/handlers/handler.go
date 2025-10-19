@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/Uttamnath64/quixzap/internal/app/common"
-	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
-	"github.com/Uttamnath64/quixzap/internal/app/utils/responses"
+	"github.com/Uttamnath64/quixzap/app/common"
+	"github.com/Uttamnath64/quixzap/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/app/utils/responses"
 	"github.com/gin-gonic/gin"
 )
 

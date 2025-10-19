@@ -5,69 +5,62 @@ import (
 	"fmt"
 
 	"github.com/Uttamnath64/logger"
-	"github.com/Uttamnath64/quixzap/internal/app/config"
-	"github.com/Uttamnath64/quixzap/internal/app/storage"
-	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
-	"github.com/Uttamnath64/quixzap/internal/routes"
+	"github.com/Uttamnath64/quixzap/api-gateway/internal/routes"
+	"github.com/Uttamnath64/quixzap/app/appcontext"
+	"github.com/Uttamnath64/quixzap/app/config"
+	"github.com/Uttamnath64/quixzap/app/utils/requests"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// Initialize application
+
+	var appCtx *appcontext.AppContext
+
+	// initialize application
 	ctx := context.Background()
 	requests.NewResponse()
 
-	// Load env
+	// load env
 	env, err := config.LoadEnv(".env")
 	if err != nil {
 		logger.New("none", nil).Error("api-application-env", err.Error())
 		return
 	}
+	appCtx.Env = &env
 
-	// Set logger
-	log := logger.New(env.Server.Environment, nil)
+	// load logger
+	appCtx.Logger = logger.New(env.Server.Environment, nil)
 
-	// Load access and refresh keys
-	err = config.LoadAccessAndRefreshKeys(&env)
+	// load access and refresh keys
+	err = config.LoadKeys(appCtx.Env)
 	if err != nil {
-		log.Error("api-application-accessAndRefreshKeys", err.Error())
+		appCtx.Logger.Error("api-application-accessAndRefreshKeys", err.Error())
 		return
 	}
 
-	// Load config
-	var con config.Config
-	err = config.LoadConfig(env, &con)
+	// load redis
+	appCtx.Redis, err = config.InitRedis(ctx, appCtx.Env.Redis.Addr, appCtx.Env.Redis.Addr, appCtx.Env.Redis.DB)
 	if err != nil {
-		log.Error("api-application-config", err.Error())
+		appCtx.Logger.Error("api-application-redis", err.Error())
 		return
 	}
-
-	// Load Redis
-	redis, err := storage.NewRedisClient(ctx, env.Redis.Addr, env.Redis.Password, env.Redis.DB)
-	if err != nil {
-		log.Error("api-application-redis", err.Error())
-		return
-	}
-
-	// DI container
-	container := storage.NewContainer(&con, log, redis, &env)
 
 	// Setup Gin server
 	server := gin.Default()
 	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowOrigins = []string{container.Env.Server.ClientOrigin}
+	corsConfig.AllowOrigins = []string{appCtx.Env.Server.ClientOrigin}
 	corsConfig.AllowMethods = []string{"GET", "POST", "PUT"}
 	corsConfig.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
 	corsConfig.AllowCredentials = true
 	server.Use(cors.New(corsConfig))
 
 	// Setup routes
-	routes.New(container, server).Handlers()
+	routes.New(appCtx, server).Handlers()
 
 	// Run server
-	if err := server.Run(fmt.Sprintf(":%d", container.Env.Server.Port)); err != nil {
-		container.Logger.Error("api-application-server", err.Error())
+	if err := server.Run(fmt.Sprintf(":%d", appCtx.Env.Server.Port)); err != nil {
+		appCtx.Logger.Error("api-application-server", err.Error())
 		return
 	}
 }

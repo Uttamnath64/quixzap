@@ -9,10 +9,10 @@ import (
 )
 
 type Avatar struct {
-	mysql *config.Mysql
+	mysql *config.MySQL
 }
 
-func NewAvatar(mysql *config.Mysql) *Avatar {
+func NewAvatar(mysql *config.MySQL) *Avatar {
 	return &Avatar{
 		mysql: mysql,
 	}

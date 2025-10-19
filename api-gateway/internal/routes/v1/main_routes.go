@@ -1,13 +1,13 @@
 package v1
 
 import (
-	"github.com/Uttamnath64/quixzap/internal/handlers"
-	"github.com/Uttamnath64/quixzap/internal/middlewares"
+	"github.com/Uttamnath64/quixzap/api-gateway/internal/handlers"
+	"github.com/Uttamnath64/quixzap/api-gateway/internal/middlewares"
 )
 
 func (routes *RoutesV1) MainRoutes() {
-	handler := handlers.NewMain(routes.container)
-	middle := middlewares.New(routes.container)
+	handler := handlers.NewMain(routes.appCtx)
+	middle := middlewares.New(routes.appCtx)
 
 	// No-auth routes for onboarding
 	routes.rGroup.Use(middle.NoAuthMiddleware())

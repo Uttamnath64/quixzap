@@ -33,7 +33,7 @@ func init() {
 	}
 
 	// load DB
-	appCtx.MySQL, err = config.InitMysql(appCtx.Env)
+	appCtx.MySQL, err = config.InitMySQL(appCtx.Env)
 	if err != nil {
 		appCtx.Logger.Error("migration-db-connect-error", err.Error())
 		os.Exit(1)

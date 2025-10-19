@@ -7,28 +7,28 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Uttamnath64/quixzap/internal/app/common"
-	"github.com/Uttamnath64/quixzap/internal/app/storage"
-	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
-	"github.com/Uttamnath64/quixzap/internal/app/utils/responses"
+	"github.com/Uttamnath64/quixzap/app/appcontext"
+	"github.com/Uttamnath64/quixzap/app/common"
+	"github.com/Uttamnath64/quixzap/app/common/types"
+	"github.com/Uttamnath64/quixzap/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/app/utils/responses"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
 )
 
 type Middleware struct {
-	container *storage.Container
+	appCtx *appcontext.AppContext
 }
 
-func New(container *storage.Container) *Middleware {
+func New(appCtx *appcontext.AppContext) *Middleware {
 	return &Middleware{
-		container: container,
+		appCtx: appCtx,
 	}
 }
 
 func (m *Middleware) Middleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		// ⏳ Create a context with timeout (e.g., 5 seconds)
 		ctx, cancel := context.WithTimeout(c.Request.Context(), 5*time.Second)
 		defer cancel()
 
@@ -49,7 +49,7 @@ func (m *Middleware) Middleware() gin.HandlerFunc {
 			if _, ok := token.Method.(*jwt.SigningMethodRSA); !ok {
 				return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 			}
-			return m.container.Env.Auth.AccessPublicKey, nil
+			return m.appCtx.Env.Auth.AccessPublicKey, nil
 		})
 
 		if err != nil || !token.Valid {
@@ -64,7 +64,7 @@ func (m *Middleware) Middleware() gin.HandlerFunc {
 		// Check if token claims exist and have the expected format
 		claims, ok := token.Claims.(jwt.MapClaims)
 		if !ok {
-			m.container.Logger.Error("middleware-claims-format", "token", token.Raw)
+			m.appCtx.Logger.Error("middleware-claims-format", "token", token.Raw)
 			c.JSON(http.StatusUnauthorized, responses.ApiResponse{
 				Status:  false,
 				Message: "Invalid token claims format.",
@@ -94,8 +94,41 @@ func (m *Middleware) Middleware() gin.HandlerFunc {
 			return
 		}
 
+		// check Session
+		_, err = m.appCtx.Redis.GetValue(fmt.Sprintf("user_sessions:%d", uint(sessionIDFloat)))
+		if err != nil {
+			c.JSON(http.StatusUnauthorized, responses.ApiResponse{
+				Status:  false,
+				Message: "Session expired or logged out",
+			})
+			c.Abort()
+			return
+		}
+
+		userIDFloat, ok := claims[string(common.CtxUserID)].(float64)
+		if !ok {
+			c.JSON(http.StatusUnauthorized, responses.ApiResponse{
+				Status:  false,
+				Message: "Invalid user ID in token.",
+			})
+			c.Abort()
+			return
+		}
+
+		userTypeFloat, ok := claims[string(common.CtxUserType)].(float64)
+		if !ok {
+			c.JSON(http.StatusUnauthorized, responses.ApiResponse{
+				Status:  false,
+				Message: "Invalid user type in token.",
+			})
+			c.Abort()
+			return
+		}
+
 		rctx := &requests.RequestContext{
 			Ctx:       ctx,
+			UserID:    uint(userIDFloat),
+			UserType:  types.UserType(int8(userTypeFloat)),
 			SessionID: uint(sessionIDFloat),
 		}
 

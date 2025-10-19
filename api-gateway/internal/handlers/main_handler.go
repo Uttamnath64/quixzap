@@ -3,22 +3,22 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/Uttamnath64/quixzap/internal/app/services"
-	"github.com/Uttamnath64/quixzap/internal/app/storage"
-	"github.com/Uttamnath64/quixzap/internal/app/utils/requests"
-	"github.com/Uttamnath64/quixzap/internal/app/utils/responses"
+	"github.com/Uttamnath64/quixzap/app/appcontext"
+	"github.com/Uttamnath64/quixzap/app/services"
+	"github.com/Uttamnath64/quixzap/app/utils/requests"
+	"github.com/Uttamnath64/quixzap/app/utils/responses"
 	"github.com/gin-gonic/gin"
 )
 
 type Main struct {
-	container   *storage.Container
+	appCtx      *appcontext.AppContext
 	authService services.AuthService
 }
 
-func NewMain(container *storage.Container) *Main {
+func NewMain(appCtx *appcontext.AppContext) *Main {
 	return &Main{
-		container:   container,
-		authService: services.NewAuth(container),
+		appCtx: appCtx,
+		// authService: services.NewAuth(container),
 	}
 }
 

@@ -22,7 +22,7 @@ func NewRedisClient(ctx context.Context, addr, password string, db int) (*RedisC
 
 	// Ping to ensure Redis connection is successful
 	if _, err := rdb.Ping(ctx).Result(); err != nil {
-		return nil, fmt.Errorf("Failed to connect to Redis: %v", err)
+		return nil, fmt.Errorf("failed to connect redis: %v", err)
 	}
 
 	return &RedisClient{Client: rdb, ctx: ctx}, nil

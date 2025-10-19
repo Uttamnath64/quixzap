@@ -21,6 +21,7 @@ const (
 	StatusDatabaseError   = 3501 // Database error
 	StatusValidationError = 3502 // Validation error
 
+	CtxUserID    ctxKey = "user_id"
 	CtxUserType  ctxKey = "user_type"
 	CtxSessionID ctxKey = "session_id"
 )

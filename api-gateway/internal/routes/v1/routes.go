@@ -1,19 +1,19 @@
 package v1
 
 import (
-	"github.com/Uttamnath64/quixzap/internal/app/storage"
+	"github.com/Uttamnath64/quixzap/app/appcontext"
 	"github.com/gin-gonic/gin"
 )
 
 type RoutesV1 struct {
-	container *storage.Container
-	rGroup    *gin.RouterGroup // Router group for /api/v1
+	appCtx *appcontext.AppContext
+	rGroup *gin.RouterGroup // Router group for /api/v1
 }
 
-func New(container *storage.Container, server *gin.Engine) *RoutesV1 {
+func New(appCtx *appcontext.AppContext, server *gin.Engine) *RoutesV1 {
 	return &RoutesV1{
-		container: container,
-		rGroup:    server.Group("/api/v1"),
+		appCtx: appCtx,
+		rGroup: server.Group("/api/v1"),
 	}
 }
 

@@ -11,10 +11,10 @@ import (
 )
 
 type Member struct {
-	mysql *config.Mysql
+	mysql *config.MySQL
 }
 
-func NewMember(mysql *config.Mysql) *Member {
+func NewMember(mysql *config.MySQL) *Member {
 	return &Member{
 		mysql: mysql,
 	}

@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Mysql struct {
+type MySQL struct {
 	ReadWriteDB *gorm.DB
 	ReadOnlyDB  *gorm.DB
 	LogDB       *gorm.DB
@@ -39,8 +39,8 @@ func EnsureDB(env *AppEnv, log *logger.Logger) error {
 	return nil
 }
 
-func InitMysql(env *AppEnv) (*Mysql, error) {
-	db := &Mysql{}
+func InitMySQL(env *AppEnv) (*MySQL, error) {
+	db := &MySQL{}
 	var err error
 
 	db.ReadWriteDB, err = connect(env.MySQL.DNS.ReadWrite)

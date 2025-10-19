@@ -9,10 +9,10 @@ import (
 )
 
 type Auth struct {
-	mysql *config.Mysql
+	mysql *config.MySQL
 }
 
-func NewAuth(mysql *config.Mysql) *Auth {
+func NewAuth(mysql *config.MySQL) *Auth {
 	return &Auth{
 		mysql: mysql,
 	}
